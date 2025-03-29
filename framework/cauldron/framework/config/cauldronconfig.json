@@ -75,10 +75,10 @@
         },
 
         "DebugOptions": {
-            "DevelopmentMode": false,
-            "DebugShaders": false,
-            "EnableRenderDocCapture": false,
-            "EnablePixCapture": false
+            "DevelopmentMode": true,
+            "DebugShaders": true,
+            "EnableRenderDocCapture": true,
+            "EnablePixCapture": true
         },
 
         "FPSLimiter": {
