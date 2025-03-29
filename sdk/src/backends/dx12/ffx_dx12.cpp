@@ -342,7 +342,7 @@ FfxErrorCode ffxLoadPixDll(const wchar_t* pixDllPath)
     if (s_PIXDLLLoaded)
         return FFX_OK;
 
-    HMODULE module = LoadLibrary(pixDllPath);
+    HMODULE module = LoadLibraryW(pixDllPath);
 
     if (!module)
     {

@@ -31,6 +31,8 @@ extern "C" {
 
 struct FfxShaderBlob;
 
+#define FFX_CAS
+
 // Get a shader blob for the specified effect, pass, and permutation index.
 FfxErrorCode ffxGetPermutationBlobByIndex(FfxEffect effectId,
     FfxPass passId,

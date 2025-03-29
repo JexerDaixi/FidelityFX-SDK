@@ -22,6 +22,41 @@
 
 # Pull in all the of the samples available and put them in a sample folder
 
+set(FFX_SC_EXECUTABLE ${CMAKE_CURRENT_SOURCE_DIR}/../sdk/tools/binary_store/FidelityFX_SC.exe)
+set(FFX_INCLUDE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../sdk/include)
+set(FFX_LIB_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../sdk/libs)
+set(FFX_BIN_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../sdk/bin/ffx_sdk)
+set(FFX_SHARED_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../sdk/src/shared)
+set(FFX_HOST_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../sdk/include/FidelityFX/host)
+set(FFX_GPU_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../sdk/include/FidelityFX/gpu)
+set(FFX_COMPONENTS_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../sdk/src/components)
+set(FFX_HOST_BACKENDS_PATH ${FFX_HOST_PATH}/../sdk/backends)
+set(FFX_SRC_BACKENDS_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../sdk/src/backends)
+
+file(GLOB FFX_SHARED_SOURCES
+    "${FFX_SHARED_PATH}/*.cpp"
+    "${FFX_SHARED_PATH}/*.h")
+
+set(FFX_PUBLIC_SOURCES
+    "${FFX_HOST_PATH}/ffx_assert.h"
+    "${FFX_HOST_PATH}/ffx_error.h"
+	"${FFX_HOST_PATH}/ffx_fx.h"
+	"${FFX_HOST_PATH}/ffx_interface.h"
+    "${FFX_HOST_PATH}/ffx_types.h"
+    "${FFX_HOST_PATH}/ffx_util.h")
+
+# Init shader sources (for easy viewing)
+set(FFX_PUBLIC_SHADER_SOURCES
+    "${FFX_GPU_PATH}/ffx_common_types.h"
+    "${FFX_GPU_PATH}/ffx_core.h"
+    "${FFX_GPU_PATH}/ffx_core_cpu.h"
+    "${FFX_GPU_PATH}/ffx_core_glsl.h"
+    "${FFX_GPU_PATH}/ffx_core_gpu_common.h"
+    "${FFX_GPU_PATH}/ffx_core_gpu_common_half.h"
+    "${FFX_GPU_PATH}/ffx_core_hlsl.h"
+    "${FFX_GPU_PATH}/ffx_core_portability.h")
+
+
 # FidelityFX Samples
 if (FFX_BREADCRUMBS OR FFX_ALL)
 	add_subdirectory(breadcrumbs)

@@ -38,13 +38,33 @@ set_target_properties(ffx_cas_native PROPERTIES
 					  IMPORTED_LOCATION_RELWITHDEBINFODX12 "${SDK_ROOT}/bin/ffx_sdk/ffx_cas_${CMAKE_GENERATOR_PLATFORM}drel.lib"
 					  IMPORTED_LOCATION_RELWITHDEBINFOVK "${SDK_ROOT}/bin/ffx_sdk/ffx_cas_${CMAKE_GENERATOR_PLATFORM}drel.lib")
 
+file(GLOB_RECURSE PUBLIC_SOURCE
+    ${FFX_HOST_BACKENDS_PATH}/dx12/*.h)
+
+file(GLOB PRIVATE_SOURCES
+	# NOTE that ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp(h)" can also be used instead
+	# simply including effect name in the path for emphasis
+	${FFX_COMPONENTS_PATH}/cas/*.h
+	${FFX_COMPONENTS_PATH}/cas/*.cpp)
+
 # CAS
 file(GLOB cas_src
 	${CMAKE_CURRENT_SOURCE_DIR}/*.h
-	${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+	${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
+    ${PUBLIC_SOURCE} ${PRIVATE_SOURCES}
+    ${FFX_SHARED_SOURCES}} ${FFX_PUBLIC_SOURCES}
+    ${FFX_PUBLIC_SHADER_SOURCES}
+    ${FFX_SRC_BACKENDS_PATH}/dx12/*.h
+    ${FFX_SRC_BACKENDS_PATH}/dx12/*.cpp
+    ${FFX_SRC_BACKENDS_PATH}/shared/*.h
+	${FFX_SRC_BACKENDS_PATH}/shared/*.cpp
+	${FFX_SRC_BACKENDS_PATH}/shared/blob_accessors/
+	${FFX_SRC_BACKENDS_PATH}/shared/blob_accessors/)
 file(GLOB cas_shaders
     ${CMAKE_CURRENT_SOURCE_DIR}/shaders/*.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/shaders/*.hlsl)
+    ${CMAKE_CURRENT_SOURCE_DIR}/shaders/*.hlsl
+    ${FFX_GPU_PATH}/cas/*.h
+    ${FFX_GPU_PATH}/cas/*.hlsl)
 #set_source_files_properties(${cas_shaders} PROPERTIES VS_TOOL_OVERRIDE "Text")
 copyCommand("${cas_shaders}" ${SHADER_OUTPUT})
 
@@ -70,6 +90,13 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 					OUTPUT_NAME_RELWITHDEBINFOVK "${EXE_OUT_NAME}drelVK"
 					VS_DEBUGGER_WORKING_DIRECTORY "${BIN_OUTPUT}")
 
+target_include_directories(${PROJECT_NAME} PUBLIC ${FFX_LIB_PATH})
+target_include_directories(${PROJECT_NAME} PUBLIC ${FFX_PASS_SHADER_OUTPUT_PATH})
+target_include_directories(${PROJECT_NAME} PRIVATE ${FFX_COMPONENTS_PATH})
+target_include_directories(${PROJECT_NAME} PRIVATE ${FFX_SHARED_PATH})
+target_include_directories(${PROJECT_NAME} PRIVATE ${FFX_SRC_BACKENDS_PATH}/shared)
+target_include_directories(${PROJECT_NAME} PRIVATE ${FFX_PASS_SHADER_OUTPUT_PATH})
+
 # Add compile definitions to identify the sample
 target_compile_definitions(${PROJECT_NAME} PRIVATE SampleName=L"FidelityFX CAS v2.1"
 											ConfigFileName=L"configs/casconfig.json"
@@ -91,3 +118,5 @@ source_group("Icon"    					FILES ${default_icon_src})
 source_group("Config" 					FILES ${config_file})
 source_group("RenderModule"				FILES ${cas_src})
 source_group("RenderModule\\Shaders"	FILES ${cas_shaders})
+
+

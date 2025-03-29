@@ -175,8 +175,10 @@ namespace cauldron
 
         std::hash<std::wstring> hasher;
         size_t hashID = hasher(hashString);
-        hashString = std::to_wstring(hashID);
-        hashString += L".lld";
+        //hashString = std::to_wstring(hashID);
+        //hashString += L".lld";
+        hashString = shaderDesc.ShaderCode;
+        hashString += L".pdb";
 
         // Get our exe path
         filesystem::path pdbPath = filesystem::current_path();
