@@ -62,7 +62,7 @@ set(config_file ${CMAKE_CURRENT_SOURCE_DIR}/config/brixelizergiconfig.json)
 copyCommand("${config_file}" ${CONFIG_OUTPUT})
 
 # Add shaders
-set_source_files_properties(${brixelizer_gi_shaders} PROPERTIES VS_TOOL_OVERRIDE "Text")
+#set_source_files_properties(${brixelizer_gi_shaders} PROPERTIES VS_TOOL_OVERRIDE "Text")
 copyCommand("${brixelizer_gi_shaders}" ${SHADER_OUTPUT})
 
 # Add the sample to the solution

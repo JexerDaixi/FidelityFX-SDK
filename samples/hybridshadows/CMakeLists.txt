@@ -33,7 +33,7 @@ file(GLOB hybridshadows_src
 file(GLOB hybridshadows_shaders
     ${CMAKE_CURRENT_SOURCE_DIR}/shaders/*.h
     ${CMAKE_CURRENT_SOURCE_DIR}/shaders/*.hlsl)
-set_source_files_properties(${hybridshadows_shaders} PROPERTIES VS_TOOL_OVERRIDE "Text")
+#set_source_files_properties(${hybridshadows_shaders} PROPERTIES VS_TOOL_OVERRIDE "Text")
 copyCommand("${hybridshadows_shaders}" ${SHADER_OUTPUT})
 
 # Add config file
