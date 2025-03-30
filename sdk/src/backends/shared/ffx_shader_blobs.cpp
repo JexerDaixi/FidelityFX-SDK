@@ -22,6 +22,8 @@
 
 #include "ffx_shader_blobs.h"
 
+#define FFX_CAS 1
+
 #if defined(FFX_FSR1) || defined(FFX_ALL)
 #include "blob_accessors/ffx_fsr1_shaderblobs.h"
 #endif // #if defined(FFX_FSR1) || defined(FFX_ALL)

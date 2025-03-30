@@ -21,7 +21,7 @@
 # THE SOFTWARE.
 
 set(CAS_BASE_ARGS
-    -reflection -deps=gcc -DFFX_GPU=1)
+    -reflection -deps=gcc -DFFX_GPU=1 -debugcompile)
 
 set(CAS_PERMUTATION_ARGS
 	-DFFX_CAS_OPTION_SHARPEN_ONLY={0,1}
