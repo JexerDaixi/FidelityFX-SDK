@@ -22,6 +22,7 @@
 
 #include "hlsl_compiler.h"
 #include "utils.h"
+#include <Windows.h>
 
 // D3D12SDKVersion needs to line up with the version number on Microsoft's DirectX12 Agility SDK Download page
 extern "C" { __declspec(dllexport) extern const UINT D3D12SDKVersion = 614; }
@@ -188,12 +189,17 @@ HLSLCompiler::HLSLCompiler(HLSLCompiler::Backend backend,
                            const std::string&    outputPath,
                            bool                  disableLogs,
                            bool                  debugCompile)
-    : ICompiler(shaderPath, shaderName, shaderFileName, outputPath, disableLogs, debugCompile)
+    : ICompiler(shaderPath, shaderName, shaderFileName, outputPath, disableLogs, true)
     , m_backend(backend)
 {
     // Read shader source
     std::ifstream stream(m_ShaderPath);
     m_Source = std::string(std::istreambuf_iterator<char>(stream), std::istreambuf_iterator<char>());
+
+    //while (!IsDebuggerPresent())
+    //{
+    //    ::Sleep(100);
+    //}
 
     switch (m_backend)
     {
@@ -532,7 +538,7 @@ bool HLSLCompiler::CompileDXC(Permutation& permutation, const std::vector<std::s
 
             std::wstring pdbPath;
             // Use a unique name that takes the hash into consideration
-            pdbPath = UTF8ToWChar(m_OutputPath + "\\") + UTF8ToWChar(permutation.hashDigest) + L".pdb";
+            pdbPath = UTF8ToWChar(m_OutputPath + "\\") + UTF8ToWChar(m_ShaderName) + L".pdb";
 
 
             // Account for longer than MAX_PATH length file paths

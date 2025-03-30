@@ -82,3 +82,5 @@ cmake --build ./ --config Release --parallel 4 -- /p:CL_MPcount=16
 cmake --build ./ --config RelWithDebInfo --parallel 4 -- /p:CL_MPcount=16
 
 cd ..
+
+pause
