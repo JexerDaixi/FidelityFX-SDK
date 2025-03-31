@@ -538,8 +538,8 @@ bool HLSLCompiler::CompileDXC(Permutation& permutation, const std::vector<std::s
 
             std::wstring pdbPath;
             // Use a unique name that takes the hash into consideration
-            pdbPath = UTF8ToWChar(m_OutputPath + "\\") + UTF8ToWChar(m_ShaderName) + L".pdb";
-
+            //pdbPath = UTF8ToWChar(m_OutputPath + "\\") + UTF8ToWChar(m_ShaderName) + L".pdb";
+            pdbPath = UTF8ToWChar(m_OutputPath + "\\") + UTF8ToWChar(permutation.hashDigest) + L".pdb";
 
             // Account for longer than MAX_PATH length file paths
             if (pdbPath.length() > MAX_PATH - 1)
